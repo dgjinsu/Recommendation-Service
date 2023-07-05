@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver #테스트 컨테이너 드라이브 세팅
+    url: jdbc:tc:mariadb:10:/// #tc 사용 시 hostname port database name 을 알아서 설정해줌
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
+kakao:
+  rest:
+    api:
+      key: ${KAKAO_REST_API_KEY}
