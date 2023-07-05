@@ -19,7 +19,7 @@ public class KakaoUriBuilderService {
         //공백이나 인식하지 못하는 특정 문자들을 인코딩해서 uri 생성
         URI uri = uriBuilder.build().encode().toUri();
 
-        log.info("[uri:]" + uri);
+        log.info("[uri:]" + address);
         return uri;
     }
 }
