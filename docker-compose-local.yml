@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  recommendation-redis:
+    container_name: recommendation-redis
+    build:
+      dockerfile: Dockerfile
+      context: ./redis
+    image: dgjinsu/recommendation-redis
+    ports:
+      - "6379:6379"
+
+  recommendation-database:
+    container_name: recommendation-database
+    build:
+      dockerfile: Dockerfile
+      context: ./database
+    image: dgjinsu/recommendation-database
+    environment:
+      - MARIADB_DATABASE=pharmacy-recommendation
+      - MARIADB_ROOT_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+    volumes:
+      - ./database/config:/etc/mysql/conf.d
+    ports:
+      - "3307:3306"
+
