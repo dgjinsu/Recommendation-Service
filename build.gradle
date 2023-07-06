@@ -49,6 +49,9 @@ dependencies {
 	// testcontainers //redis 는 따로 제공하고 있지 않기 때문에 도커 이미지를 불러와서 제공할 예정
 	testImplementation 'org.testcontainers:spock:1.17.1'
 	testImplementation 'org.testcontainers:mariadb:1.17.1'
+
+	// spring retry
+	implementation 'org.springframework.retry:spring-retry'
 }
 
 tasks.named('test') {
