@@ -1,13 +1,21 @@
 package fastcampus.directionsService.direction.service
 
 import fastcampus.directionsService.api.dto.DocumentDto
+import fastcampus.directionsService.api.service.KakaoCategorySearchService
+import fastcampus.directionsService.direction.repository.DirectionRepository
 import fastcampus.directionsService.pharmacy.dto.PharmacyDto
 import fastcampus.directionsService.pharmacy.service.PharmacySearchService
 import spock.lang.Specification
 
 class DirectionServiceTest extends Specification {
     private PharmacySearchService pharmacySearchService = Mock()
-    private DirectionService directionService = new DirectionService(pharmacySearchService)
+    private DirectionRepository directionRepository = Mock()
+    private KakaoCategorySearchService kakaoCategorySearchService = Mock()
+    private Base62Service base62Service = Mock()
+
+    private DirectionService directionService = new DirectionService(
+            pharmacySearchService, directionRepository, kakaoCategorySearchService, base62Service)
+
 
     private List<PharmacyDto> pharmacyList
 

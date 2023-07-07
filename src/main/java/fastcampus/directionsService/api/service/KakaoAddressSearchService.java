@@ -22,7 +22,7 @@ import java.net.URI;
 public class KakaoAddressSearchService {
     private final RestTemplate restTemplate;
     private final KakaoUriBuilderService kakaoUriBuilderService;
-    @Value("${kakao.rest.api.key")
+    @Value("${kakao.rest.api.key}")
     private String kakaoRestApiKey;
 
     @Retryable(
@@ -31,15 +31,15 @@ public class KakaoAddressSearchService {
             backoff = @Backoff(delay = 2000)
     )
     public KakaoApiResponseDto requestAddressSearch(String address) {
-        //null 값이나 빈 값 체크
-        if(ObjectUtils.isEmpty(address)) return null;
-        URI uri = kakaoUriBuilderService.buildUriByAddressSearch(address);
 
+        if(ObjectUtils.isEmpty(address)) return null;
+
+        URI uri = kakaoUriBuilderService.buildUriByAddressSearch(address);
+        log.info("kakaoRestApiKiy = {}", kakaoRestApiKey);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, "KakaoAK " + kakaoRestApiKey);
-
         HttpEntity httpEntity = new HttpEntity<>(headers);
-        //kakao api 호출 (url, method, requestEntity, responseType)
+
         return restTemplate.exchange(uri, HttpMethod.GET, httpEntity, KakaoApiResponseDto.class).getBody();
     }
 

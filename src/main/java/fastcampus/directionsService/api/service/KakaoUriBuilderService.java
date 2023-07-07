@@ -9,20 +9,20 @@ import java.net.URI;
 @Service
 @Slf4j
 public class KakaoUriBuilderService {
-    private static String KAKAO_LOCAL_SEARCH_ADDRESS_URL = "https://dapi.kakao.com/v2/local/search/address.json";
-    private static String KAKAO_LOCAL_CATEGORY_SEARCH_URL = "https://dapi.kakao.com/v2/local/search/category.json";
-    public URI buildUriByAddressSearch(String address) {
+    private static final String KAKAO_LOCAL_SEARCH_ADDRESS_URL = "https://dapi.kakao.com/v2/local/search/address.json";
 
-        //URI 만들어주는 빌더
+    private static final String KAKAO_LOCAL_CATEGORY_SEARCH_URL = "https://dapi.kakao.com/v2/local/search/category.json";
+
+    public URI buildUriByAddressSearch(String address) {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(KAKAO_LOCAL_SEARCH_ADDRESS_URL);
         uriBuilder.queryParam("query", address);
 
-        //공백이나 인식하지 못하는 특정 문자들을 인코딩해서 uri 생성
-        URI uri = uriBuilder.build().encode().toUri();
+        URI uri = uriBuilder.build().encode().toUri(); // encode default utf-8
+        log.info("[KakaoAddressSearchService buildUriByAddressSearch] address: {}, uri: {}", address, uri);
 
-        log.info("[uri:]" + address);
         return uri;
     }
+
 
     public URI buildUriByCategorySearch(double latitude, double longitude, double radius, String category) {
 
