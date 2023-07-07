@@ -5,7 +5,7 @@ services:                                               # 이 항목 밑에 실�
     build:
       dockerfile: Dockerfile
       context: ./redis
-    image: zcx5674/pharmacy-recommendation-redis
+    image: dgjinsu/pharmacy-recommendation-redis
     ports:
       - "6380:6379"
   pharmacy-recommendation-database:
@@ -13,7 +13,7 @@ services:                                               # 이 항목 밑에 실�
     build:
       dockerfile: Dockerfile
       context: ./database
-    image: zcx5674/pharmacy-recommendation-database
+    image: dgjinsu/pharmacy-recommendation-database
     environment:
       - MARIADB_DATABASE=pharmacy-recommendation
       - MARIADB_ROOT_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
