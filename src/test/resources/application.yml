@@ -10,7 +10,7 @@ spring:
 kakao:
   rest:
     api:
-      key: ${KAKAO_REST_API_KEY}
+      key: bcb3e26b3ecd5f5a48c6f37ee983167a
 
 pharmacy:
   recommendation:

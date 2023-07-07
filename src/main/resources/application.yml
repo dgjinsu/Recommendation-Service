@@ -30,7 +30,7 @@ spring:
     password: ${SPRING_DATASOURCE_PASSWORD}
   redis:
     host: localhost
-    port: 6379
+    port: 6380
   jpa:
     hibernate:
       ddl-auto: validate
@@ -41,7 +41,25 @@ pharmacy:
     base:
       url: http://localhost:8080/dir/
 ---
+# 운영 환경에서 사용하기 위한 설정
 spring:
   config:
     activate:
       on-profile: prod
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://pharmacy-recommendation-database:3307/pharmacy-recommendation
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  redis:
+    host: pharmacy-recommendation-redis
+    port: 6380
+  jpa:
+    hibernate:
+      ddl-auto: validate # prod 배포시 validate
+    show-sql: true
+
+pharmacy:
+  recommendation:
+    base:
+      url: http://13.124.255.176/dir/

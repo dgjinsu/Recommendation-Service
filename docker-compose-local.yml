@@ -7,7 +7,7 @@ services:
       context: ./redis
     image: dgjinsu/recommendation-redis
     ports:
-      - "6379:6379"
+      - "6380:6379"
 
   recommendation-database:
     container_name: recommendation-database

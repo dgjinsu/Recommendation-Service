@@ -1,5 +1,6 @@
 package fastcampus.directionsService.pharmacy.service;
 
+import fastcampus.directionsService.pharmacy.cache.PharmacyRedisTemplateService;
 import fastcampus.directionsService.pharmacy.dto.PharmacyDto;
 import fastcampus.directionsService.pharmacy.entity.Pharmacy;
 import lombok.RequiredArgsConstructor;
@@ -14,11 +15,16 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PharmacySearchService {
     private final PharmacyService pharmacyService;
+    private final PharmacyRedisTemplateService pharmacyRedisTemplateService;
 
     public List<PharmacyDto> searchPharmacyDtoList() {
 
         // redis
-
+        List<PharmacyDto> pharmacyDtoList = pharmacyRedisTemplateService.findAll();
+        if(!pharmacyDtoList.isEmpty()){
+            log.info("redis findAll success");
+            return pharmacyDtoList;
+        }
         // db
         return pharmacyService.findAll().stream()
                 .map(entity -> convertToPharmacyDto(entity))
